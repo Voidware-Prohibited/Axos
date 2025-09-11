@@ -11,7 +11,7 @@ UAxosGameStateComponent::UAxosGameStateComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-	OverrideYaw = 0.0f;
+	NorthYaw = 0.0f;
 	UseOverrideYaw  = false;
 }
 
@@ -23,7 +23,7 @@ void UAxosGameStateComponent::GetLifetimeReplicatedProps(TArray<FLifetimePropert
 
 	Parameters.Condition = COND_SkipOwner;
 	DOREPLIFETIME_WITH_PARAMS_FAST(ThisClass, UseOverrideYaw, Parameters)
-	DOREPLIFETIME_WITH_PARAMS_FAST(ThisClass, OverrideYaw, Parameters)
+	DOREPLIFETIME_WITH_PARAMS_FAST(ThisClass, NorthYaw, Parameters)
 }
 
 
@@ -32,9 +32,20 @@ void UAxosGameStateComponent::OnRep_UseOverrideYaw()
 	//
 }
 
-void UAxosGameStateComponent::OnRep_OverrideYaw()
+void UAxosGameStateComponent::OnRep_NorthYaw()
 {
-	//
+	AxosLevelActor.Get()->Server_SetYaw(NorthYaw);
+}
+
+float UAxosGameStateComponent::GetNorthYaw()
+{
+	return NorthYaw;
+}
+
+void UAxosGameStateComponent::SetNorthYaw(const float NewNorthYaw)
+{
+	OnNorthYawChanged.Broadcast(NorthYaw, NewNorthYaw);
+	NorthYaw = NewNorthYaw;
 }
 
 // Called when the game starts

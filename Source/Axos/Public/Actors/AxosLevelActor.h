@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/ArrowComponent.h" 
+#include "Interfaces/AxosInterface.h"
+#include "DaySequenceActor.h"
 #include "AxosLevelActor.generated.h"
 
 class AGameState;
@@ -34,7 +37,16 @@ public:
 	UPROPERTY(Replicated)
 	float ReplicatedYaw;
 
+	UFUNCTION()
+	void OnGameStateChange(float OldValue, float NewValue);
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<ADaySequenceActor> DaySequenceActor;
+
 private:
+	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
+	class UArrowComponent* ArrowComponent;
+	
 	// A flag to indicate that the Game State has an active override
 	bool bHasGameStateOverride = false;
 	float GameStateOverrideYaw = 0.0f;

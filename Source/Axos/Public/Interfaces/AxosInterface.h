@@ -1,4 +1,5 @@
-// MIT
+// Copyright (C) 2025 Uriel Ballinas, VOIDWARE Prohibited. All rights reserved.
+// This software is licensed under the MIT License (LICENSE.md).
 
 #pragma once
 
@@ -7,6 +8,7 @@
 
 #include "AxosInterface.generated.h"
 
+class UAxosGameStateComponent;
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
 class UAxosInterface : public UInterface
@@ -23,13 +25,6 @@ class AXOS_API IAxosInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	// Declare the delegate as a UPROPERTY within the interface
-	// UDELEGATE(BlueprintAssignable, Category = "MyInterface")
-	// class FOnGameStateChanged OnGameStateChangedDelegate;
-
-	// Declare the interface function that will broadcast the delegate
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyInterface")
-	void BroadcastGameStateChange(const FString& NewState);
-	virtual void BroadcastGameStateChange_Implementation(const FString& NewState) = 0; // Pure virtual for native implementation
-	
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Axos Interface")
+	TSoftObjectPtr<UAxosGameStateComponent> GetAxosGameStateComponent();
 };

@@ -1,6 +1,8 @@
 // MIT
 
 #include "Actors/AxosLevelActor.h"
+
+#include "Components/AxosGameStateComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/GameState.h"
 
@@ -11,6 +13,10 @@ AAxosLevelActor::AAxosLevelActor()
 	PrimaryActorTick.bCanEverTick = true;
 	GameState =nullptr;
 	ReplicatedYaw = 0.0f;
+
+	ArrowComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("MyArrow"));
+	ArrowComponent->SetupAttachment(RootComponent); 
+	ArrowComponent->SetArrowColor(FLinearColor::Red);
 }
 
 void AAxosLevelActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -28,7 +34,18 @@ void AAxosLevelActor::BeginPlay()
 	{
 		GameState = GS;
 		// Bind the GameState's RepNotify function for the override
-		// GameState.Get()->OnRep_AuthoritativeYaw.AddDynamic(this, &AAxosLevelActor::OnGameStateOverrideUpdated);
+		//GameState.Get()->OnRep_AuthoritativeYaw.AddDynamic(this, &AAxosLevelActor::OnGameStateOverrideUpdated);
+		if (const TSoftObjectPtr<UAxosGameStateComponent> AxosGameStateComponent = IAxosInterface::Execute_GetAxosGameStateComponent(GS))
+		{
+			ReplicatedYaw = AxosGameStateComponent->GetNorthYaw();
+			SetActorRotation(FRotator(0.0f, ReplicatedYaw, 0.0f));
+			AxosGameStateComponent->OnNorthYawChanged.AddDynamic(this, &AAxosLevelActor::OnGameStateChange);
+		}
+	}
+
+	if (DaySequenceActor)
+	{
+		DaySequenceActor->SetActorRotation(FRotator(0, ReplicatedYaw, 0));
 	}
 	
 }
@@ -52,6 +69,12 @@ void AAxosLevelActor::Tick(float DeltaTime)
 		SetActorRotation(FMath::RInterpTo(CurrentRot, TargetRot, DeltaTime, 10.0f));
 	}
 
+}
+
+void AAxosLevelActor::OnGameStateChange(float OldValue, float NewValue)
+{
+	ReplicatedYaw = NewValue;
+	SetActorRotation(FRotator(0, NewValue, 0));
 }
 
 void AAxosLevelActor::Server_SetYaw_Implementation(float NewYaw)

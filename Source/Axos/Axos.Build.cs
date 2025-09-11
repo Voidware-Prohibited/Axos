@@ -25,7 +25,7 @@ public class Axos : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core",
+				"Core", "DaySequence",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
