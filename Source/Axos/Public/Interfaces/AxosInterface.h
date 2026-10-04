@@ -27,4 +27,16 @@ class AXOS_API IAxosInterface
 public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Axos Interface")
 	TSoftObjectPtr<UAxosGameStateComponent> GetAxosGameStateComponent();
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Axos Interface")
+	float GetNorthRotation();
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Axos Interface")
+	void SetNorthRotation(float Angle);
+	
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Axos Interface")
+	bool GetNorthRotationOverride();
+	
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Axos Interface")
+	void SetNorthRotationOverride(bool Override);
 };

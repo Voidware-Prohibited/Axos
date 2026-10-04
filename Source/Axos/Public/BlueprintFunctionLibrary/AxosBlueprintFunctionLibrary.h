@@ -13,6 +13,6 @@ class AXOS_API UAxosBlueprintFunctionLibrary : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, Category = "Actor Bearing")
-	static float GetActorBearing(AActor* TargetActor, AGameState* GameState);
+	UFUNCTION(BlueprintCallable, Category = "Actor Azimuth")
+	static float GetActorAzimuth(AActor* TargetActor, TSoftObjectPtr<AGameStateBase> GameState);
 };

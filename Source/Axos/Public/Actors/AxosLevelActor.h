@@ -4,9 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/ArrowComponent.h" 
+#include "Components/ArrowComponent.h"
+#include "Components/DecalComponent.h"
+#include "Components/BillboardComponent.h"
+#include "Components/TextRenderComponent.h"
 #include "Interfaces/AxosInterface.h"
-#include "DaySequenceActor.h"
 #include "AxosLevelActor.generated.h"
 
 class AGameState;
@@ -40,10 +42,13 @@ public:
 	UFUNCTION()
 	void OnGameStateChange(float OldValue, float NewValue);
 
-	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<ADaySequenceActor> DaySequenceActor;
-
 private:
+	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
+	TObjectPtr<UBillboardComponent> SpriteComponent;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
+	TObjectPtr<class UTextRenderComponent> TextRender;
+	
 	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
 	class UArrowComponent* ArrowComponent;
 	
@@ -54,5 +59,13 @@ private:
 
 	// Called when the GameState's override is updated
 	void OnGameStateOverrideUpdated();
+
+public:
+	/** Returns TextRender subobject **/
+	class UTextRenderComponent* GetTextRender() const { return TextRender; }
+#if WITH_EDITORONLY_DATA
+	/** Returns SpriteComponent subobject **/
+	UBillboardComponent* GetSpriteComponent() const { return SpriteComponent; }
+#endif
 	
 };

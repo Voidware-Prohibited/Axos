@@ -1,0 +1,34 @@
+﻿#pragma once
+
+#include "NativeGameplayTags.h"
+
+namespace AxosTags
+{
+	namespace ExecutionMode
+	{
+		AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Direct)
+		AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Abraxas)
+		AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Archon)
+	}
+	namespace MeasurementSystem
+	{
+		AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Metric)
+		AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Imperial)
+	}
+	namespace Marker
+	{
+		namespace State
+		{
+			AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Inactive)
+			AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Active)
+			AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Primary)
+			AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Beacon)
+			AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Offline)
+		}
+		namespace IconDisplayMode
+		{
+			AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Image)
+			AXOS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Material)
+		}
+	}
+}

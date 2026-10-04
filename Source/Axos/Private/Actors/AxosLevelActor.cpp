@@ -5,18 +5,33 @@
 #include "Components/AxosGameStateComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/GameState.h"
+#include "Math/Color.h"
 
 // Sets default values
 AAxosLevelActor::AAxosLevelActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	GameState =nullptr;
+	bIsSpatiallyLoaded = false;
+	GameState = nullptr;
 	ReplicatedYaw = 0.0f;
 
-	ArrowComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("MyArrow"));
+	ArrowComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
 	ArrowComponent->SetupAttachment(RootComponent); 
 	ArrowComponent->SetArrowColor(FLinearColor::Red);
+	ArrowComponent->bHiddenInGame = true;
+	
+	SpriteComponent = CreateDefaultSubobject<UBillboardComponent>(TEXT("Sprite"));
+	SpriteComponent->SetupAttachment(ArrowComponent);
+	SpriteComponent->AddLocalOffset(FVector(0.0f, 0.0f, 100.0f));
+	SpriteComponent->bHiddenInGame = true;
+
+	TextRender = CreateDefaultSubobject<UTextRenderComponent>(TEXT("Text"));
+	TextRender->SetupAttachment(ArrowComponent);
+	TextRender->bHiddenInGame = true;
+	SpriteComponent->AddLocalOffset(FVector(0.0f, 0.0f, 50.0f));
+	TextRender->SetTextRenderColor(FColor(255, 0, 0));
+	TextRender->SetHorizontalAlignment(EHorizTextAligment::EHTA_Center);
 }
 
 void AAxosLevelActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -41,13 +56,7 @@ void AAxosLevelActor::BeginPlay()
 			SetActorRotation(FRotator(0.0f, ReplicatedYaw, 0.0f));
 			AxosGameStateComponent->OnNorthYawChanged.AddDynamic(this, &AAxosLevelActor::OnGameStateChange);
 		}
-	}
-
-	if (DaySequenceActor)
-	{
-		DaySequenceActor->SetActorRotation(FRotator(0, ReplicatedYaw, 0));
-	}
-	
+	}	
 }
 
 // Called every frame
@@ -69,6 +78,7 @@ void AAxosLevelActor::Tick(float DeltaTime)
 		SetActorRotation(FMath::RInterpTo(CurrentRot, TargetRot, DeltaTime, 10.0f));
 	}
 
+	TextRender->SetText(FText::AsNumber(ReplicatedYaw));
 }
 
 void AAxosLevelActor::OnGameStateChange(float OldValue, float NewValue)

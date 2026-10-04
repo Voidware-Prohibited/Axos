@@ -11,7 +11,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnNorthWayChanged, float, OldValue, float, NewValue);
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(BlueprintType, Blueprintable,  ClassGroup=(GameState), meta=(BlueprintSpawnableComponent))
 class AXOS_API UAxosGameStateComponent : public UActorComponent, public IAxosInterface
 {
 	GENERATED_BODY()
@@ -25,10 +25,10 @@ public:
 	FOnNorthWayChanged OnNorthYawChanged;
 
 	UPROPERTY(ReplicatedUsing=OnRep_UseOverrideYaw, EditAnywhere, BlueprintReadWrite, Category = "Control")
-	bool UseOverrideYaw;
+	bool UseOverrideYaw {false};
 
 	UPROPERTY(ReplicatedUsing=OnRep_NorthYaw, EditAnywhere, BlueprintReadWrite, Category = "Control")
-	float NorthYaw;
+	float NorthYaw {0.0f};
 
 	UFUNCTION()
 	void OnRep_UseOverrideYaw();
@@ -46,11 +46,14 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debug")
+	bool bDebugMode {false};
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
-	TSoftObjectPtr<AAxosLevelActor> AxosLevelActor;
+	TSoftObjectPtr<AAxosLevelActor> AxosLevelActor {nullptr};
 	
 };
