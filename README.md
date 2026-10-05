@@ -19,32 +19,71 @@
 
 > [!NOTE]  Following the acquisition of GitHub by Microsoft, VOIDWARE Prohibited has taken the principled acion and have begun primarily hosting our code and content on Codeberg. Mirrors will still be maintained on GitHub and GitLab.
 
-Replicated True North Game State Component. Check out the parent project [Target Vector](https://github.com/Voidware-Prohibited/TargetVector).
+Replicated True North Game State Component. Axos provides an easily accessible, multiplayer-ready, global North direction parameter for use in Navigation, Day Night systems, Widgets, Materials or anything else.
+
+Check out the parent project [Target Vector](https://github.com/Voidware-Prohibited/TargetVector).
 
 > [!WARNING]  _Axos is under heavy development, many features may not be finished or production-ready. Use at your own risk._ 
 
 # Features
-- TODO
+- Axos Game State Component.
+- Axos Game State Interface.
+- Axos Level Actor -  Override the True North value with the rotation of the Axos Level Actor.
+- Write True North value to a Material Parameter Collection.
+
+## Demo Content
+- Demo Compass UMG Widget.
+- Demo Player Character.
 
 
 # Installation
 
-Clone or Download into a folder named _Axos_ in your existing projects Plugins folder.
+## Quick Start
 
-**Dependencies**
+- Clone or Download into a folder named _Axos_ in your existing projects Plugins folder.
+- Add Axos Game State Component and Axos Game State Interface to your Game State.
+- Implement GetAxosGameStateComponent.
+- Implement GetNorthRotation.
 
-- TODO
+### (Optional) Setup Level Actor and Override
+- Implement GetNorthRotationOverride
+- Set "Use Override Yaw" to True on Axos Game State Component
+
+## Full Installation
+
+Full Installation instructions available in [Axos Documentation - Full Installation](https://axos.voidwarex.com/docs/Installation)
+
 
 # Usage
 
-## Unreal Engine
+## Axos Game State Component
 
-- TODO
+
+## Axos Game State Interface
+
+
+## Axos Level Actor
+
+
+## Material Parameter Collection
+
+
+## Compass UMG Widget
 
 
 # Settings
 
-- TODO
+## Axos Game State Component
+
+
+## Axos Level Actor
+
+
+## Material Parameter Collection
+
+
+## Compass UMG Widget
+
 
 
 # Contributions
