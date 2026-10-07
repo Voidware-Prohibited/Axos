@@ -7,7 +7,7 @@
 </p>
 <p align="center">
      <img alt="Status: pre--αlpha" src="https://img.shields.io/badge/status-pre--%CE%B1lpha-yellow.svg?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIj48cGF0aCBkPSJNMjIuNzUgMTIuNTAxQzIyLjc1IDEyLjkxNSAyMi40MTQgMTMuMjUxIDIyIDEzLjI1MUgxOC4yMzZDMTguMTE1IDEzLjI1MSAxNy45NzggMTMuMzQ1IDE3LjkxIDEzLjQ3M0wxNi42ODkgMTUuNzkxQzE2LjQzNCAxNi4yNzUgMTUuOTE2IDE2LjU0MSAxNS4zNjcgMTYuNDc1QzE0LjgyMyAxNi40MDcgMTQuMzg4IDE2LjAyMiAxNC4yNjIgMTUuNDk0TDEyLjA5OSA2LjQ4MTAyTDkuODU4IDE4LjY5MUM5Ljc0NyAxOS4yOTIgOS4yMzkgMTkuNzI3IDguNjIyIDE5Ljc1QzguNjA1IDE5Ljc1IDguNTg4IDE5Ljc1IDguNTcxIDE5Ljc1QzcuOTc1IDE5Ljc1IDcuNDYgMTkuMzU5IDcuMzA5IDE4Ljc4NUw1LjkzMiAxMy41MzdDNS44OTYgMTMuMzk5IDUuNzgyIDEzLjI1IDUuNjE2IDEzLjI1SDJDMS41ODYgMTMuMjUgMS4yNSAxMi45MTQgMS4yNSAxMi41QzEuMjUgMTIuMDg2IDEuNTg2IDExLjc1IDIgMTEuNzVINS42MTVDNi40MzggMTEuNzUgNy4xNjUgMTIuMzI4IDcuMzgyIDEzLjE1Nkw4LjUzOCAxNy41NjVMMTAuNzg4IDUuMzExMDJDMTAuODk4IDQuNzA1MDIgMTEuNDEyIDQuMjY5MDIgMTIuMDM1IDQuMjUyMDJDMTIuNjUxIDQuMjE3MDIgMTMuMTk4IDQuNjQxMDIgMTMuMzQzIDUuMjQyMDJMMTUuNTk4IDE0LjY0MkwxNi41ODIgMTIuNzc1QzE2LjkwOSAxMi4xNTMgMTcuNTU4IDExLjc1MiAxOC4yMzUgMTEuNzUySDIxLjk5OUMyMi40MTMgMTEuNzUyIDIyLjc0OSAxMi4wODggMjIuNzQ5IDEyLjUwMkwyMi43NSAxMi41MDFaIiBmaWxsPSIjZmZmZmZmIj48L3BhdGg+PC9zdmc+">&nbsp;
-     <a href="https://github.com/Voidware-Prohibited/Chronos/commits/master"><img src="https://img.shields.io/github/last-commit/Voidware-Prohibited/Chronos.svg?logo=git&logoColor=white" alt="Last commit"></a>
+     <a href="https://github.com/Voidware-Prohibited/Axos/commits/master"><img src="https://img.shields.io/github/last-commit/Voidware-Prohibited/Axos.svg?logo=git&logoColor=white" alt="Last commit"></a>
 </p>
 <!--<p align="center">
      <a href="https://github.com/Voidware-Prohibited/Axos/commits/master"><img src="https://img.shields.io/github/check-runs/Voidware-Prohibited/Axos/stable?logo=githubactions&logoColor=white&label=CI" alt="CI"></a>&nbsp;
@@ -15,13 +15,12 @@
      <a href="https://github.com/Voidware-Prohibited/Chronos/commits/master"><img src="https://img.shields.io/codecov/c/github/Voidware-Prohibited/Chronos/stable?logo=codecov&logoColor=white" alt="Coverage"></a>&nbsp;
 </p>-->
 <p align="center">
-     <a href="https://github.com/Voidware-Prohibited/Axos/commits/master"><img src="https://img.shields.io/github/last-commit/Voidware-Prohibited/Axos.svg?style=flat-square&logo=github&logoColor=white" alt="GitHub last commit"></a>&nbsp;
-     <a href="https://github.com/Voidware-Prohibited/Axos/issues"><img src="https://img.shields.io/github/issues-raw/Voidware-Prohibited/Axos.svg?style=flat-square&logo=github&logoColor=white" alt="GitHub issues"></a>&nbsp;
-     <a href="https://github.com/Voidware-Prohibited/Axos/pulls"><img src="https://img.shields.io/github/issues-pr-raw/Voidware-Prohibited/Axos.svg?style=flat-square&logo=github&logoColor=white" alt="GitHub pull requests"> </a>&nbsp;
-     <a href="https://github.com/Voidware-Prohibited/Axos/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-silver.svg?style=flat-square&logo=github&logoColor=white" alt="MIT License"></a>
+     <a href="https://github.com/Voidware-Prohibited/Axos/issues"><img src="https://img.shields.io/github/issues-raw/Voidware-Prohibited/Axos.svg?logo=forgejo&logoColor=white" alt="GitHub issues"></a>&nbsp;
+     <a href="https://github.com/Voidware-Prohibited/Axos/pulls"><img src="https://img.shields.io/github/issues-pr-raw/Voidware-Prohibited/Axos.svg?logo=forgejo&logoColor=white" alt="GitHub pull requests"></a>&nbsp;
+     <a href="https://github.com/Voidware-Prohibited/Axos/blob/master/LICENSE"><img src="https://img.shields.io/badge/VOIDWARE%20Dual%20License-silver?style=flat&logo=unlicense&logoColor=white&label=License&color=white" alt="VOIDWARE Dual License"></a>
 </p>
 <p align="center">
-     <a href="https://github.com/sponsors/colorindarkness"><img src="https://img.shields.io/github/sponsors/colorindarkness.svg?style=flat-square&logo=github&logoColor=white" alt="Become a Sponsor"></a>&nbsp;
+     <a href="https://github.com/sponsors/colorindarkness"><img src="https://img.shields.io/github/sponsors/colorindarkness.svg?logo=github&logoColor=white" alt="Become a Sponsor"></a>&nbsp;
      <a href="https://www.patreon.com/colorindarkness"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dcolorindarkness%26type%3Dpatrons&style=flat" alt="Become a Patron"></a>&nbsp;
      <a href="https://ko-fi.com/colorindarkness"><img alt="Support me on Ko-fi" src="https://img.shields.io/badge/support_me_on-Ko--fi-red?link=https%3A%2F%2Fko-fi.com%2Fcolorindarkness"></a>&nbsp;
      <a href="https://liberapay.com/colorindarkness"><img alt="Support me on Liberapay" src="https://img.shields.io/badge/support_me_on-liberapay-yellow?link=https%3A%2F%2Fliberapay.com%2Fcolorindarkness%2F"></a>
