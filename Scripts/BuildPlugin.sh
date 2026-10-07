@@ -1,29 +1,65 @@
-@echo off
+#!/bin/bash
 
-set EngineVersion=5.4
+# Set title (supported by some Linux terminal emulators)
+echo -ne "\033]0;Build Plugin\007"
 
-FOR %%A IN ("%~dp0.") DO SET ParentFolder=%%~dpA
-SET AlsFolder=%ParentFolder%ALS-Refactored
+PLUGIN_NAME="Axos"
+SOURCE_BUILD_VERSION="5.7"
+INSTALLED_BUILD_VERSION="5.7"
+ENGINE_DIRECTORY=""
 
-if not exist %AlsFolder% (
-  echo ALS-Refactored not found in Plugins directory. Clone or Download ALS-Refactored into the Plugins folder to proceed.
-) else (
-  echo ALS-Refactored directory found.
-  for /F %%i in ('dir /b /a "%AlsFolder%*"') do (
-    echo ALS-Refactored directory not empty. Starting Build.
-    for /f "skip=2 tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\EpicGames\Unreal Engine\%EngineVersion%" /v "InstalledDirectory"') do set "EngineDirectory=%%b"
+# 1. Check if ENGINE_DIRECTORY is already set as an environment variable
+if [ -n "$UE_ROOT" ]; then
+    ENGINE_DIRECTORY="$UE_ROOT"
+fi
 
-    set AutomationToolPath="%EngineDirectory%\Engine\Build\BatchFiles\RunUAT.bat"
-    set PluginPath="%cd%\ALSXT.uplugin"
-    set OutputPath="%cd%\Build"
+# 2. If not found, check common Linux source / installed paths
+# (Adjust these paths if you install UE elsewhere, e.g., /opt/UnrealEngine)
+if [ -z "$ENGINE_DIRECTORY" ]; then
+    POSSIBLE_PATHS=(
+        "$HOME/UnrealEngine-$SOURCE_BUILD_VERSION"
+        "$HOME/Games/Heroic/UnrealEngine-$INSTALLED_BUILD_VERSION"
+        "/opt/UnrealEngine-$INSTALLED_BUILD_VERSION"
+    )
 
-    title Build Plugin
-    echo Automation Tool Path: %AutomationToolPath%
-    echo:
+    for PATH_CHECK in "${POSSIBLE_PATHS[@]}"; do
+        if [ -d "$PATH_CHECK" ]; then
+            ENGINE_DIRECTORY="$PATH_CHECK"
+            break
+        fi
+     Cabe
+fi
 
-    call %AutomationToolPath% BuildPlugin -Plugin=%PluginPath% -Package=%OutputPath% -Rocket -TargetPlatforms=Win64
-    echo:
-    pause
+# 3. Handle error if the engine directory cannot be found
+if [ -z "$ENGINE_DIRECTORY" ]; then
+    clear
+    echo "Can't find a path to the engine!"
+    echo "Please set the UE_ROOT environment variable or update this script."
+    echo "Example: export UE_ROOT='/path/to/UnrealEngine'"
+    echo ""
+    read -p "Press [Enter] to exit..."
     exit 0
-  )
-)
+fi
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Define Linux-specific paths
+AUTOMATION_TOOL_PATH="$ENGINE_DIRECTORY/Engine/Build/BatchFiles/RunUAT.sh"
+PLUGIN_PATH="$SCRIPT_DIR/$PLUGIN_NAME.uplugin"
+OUTPUT_PATH="$SCRIPT_DIR/Build"
+
+echo "Automation Tool Path: $AUTOMATION_TOOL_PATH"
+echo ""
+
+# Ensure the automation tool is executable and run it
+if [ -f "$AUTOMATION_TOOL_PATH" ]; then
+    chmod +x "$AUTOMATION_TOOL_PATH"
+    "$AUTOMATION_TOOL_PATH" BuildPlugin -Plugin="$PLUGIN_PATH" -Package="$OUTPUT_PATH" -Rocket -TargetPlatforms=Linux
+else
+    echo "Error: RunUAT.sh not found at $AUTOMATION_TOOL_PATH"
+fi
+
+echo ""
+read -p "Press [Enter] to exit..."
+exit 0

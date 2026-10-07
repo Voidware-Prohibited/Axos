@@ -1,29 +1,47 @@
 @echo off
 
-set EngineVersion=5.4
+title Build Plugin
 
-FOR %%A IN ("%~dp0.") DO SET ParentFolder=%%~dpA
-SET AlsFolder=%ParentFolder%ALS-Refactored
+set PluginName=Axos
+set SourceBuildVersion=5.7
+set InstalledBuildVersion=5.7
 
-if not exist %AlsFolder% (
-  echo ALS-Refactored not found in Plugins directory. Clone or Download ALS-Refactored into the Plugins folder to proceed.
-) else (
-  echo ALS-Refactored directory found.
-  for /F %%i in ('dir /b /a "%AlsFolder%*"') do (
-    echo ALS-Refactored directory not empty. Starting Build.
-    for /f "skip=2 tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\EpicGames\Unreal Engine\%EngineVersion%" /v "InstalledDirectory"') do set "EngineDirectory=%%b"
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKEY_CURRENT_USER\Software\Epic Games\Unreal Engine\Builds" /v "%SourceBuildVersion%"') do (
+    set EngineDirectory=%%b
+)
 
-    set AutomationToolPath="%EngineDirectory%\Engine\Build\BatchFiles\RunUAT.bat"
-    set PluginPath="%cd%\ALSXT.uplugin"
-    set OutputPath="%cd%\Build"
+if "%EngineDirectory%" == "" (
+    for /f "skip=2 tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\EpicGames\Unreal Engine\%InstalledBuildVersion%" /v "InstalledDirectory"') do (
+        set EngineDirectory=%%b
+    )
+)
 
-    title Build Plugin
-    echo Automation Tool Path: %AutomationToolPath%
+if "%EngineDirectory%" == "" (
+    cls
+
+    echo Can't find a path to the engine! Make sure at least one of the following registry entries exists:
+    echo:
+    echo For a source build:
+    echo    Key:   HKEY_CURRENT_USER\Software\Epic Games\Unreal Engine\Builds
+    echo    Value: %SourceBuildVersion%
+    echo:
+    echo For an installed build:
+    echo    Key:   HKEY_LOCAL_MACHINE\SOFTWARE\EpicGames\Unreal Engine\%InstalledBuildVersion%
+    echo    Value: InstalledDirectory
     echo:
 
-    call %AutomationToolPath% BuildPlugin -Plugin=%PluginPath% -Package=%OutputPath% -Rocket -TargetPlatforms=Win64
-    echo:
     pause
     exit 0
-  )
 )
+
+set AutomationToolPath=%EngineDirectory%\Engine\Build\BatchFiles\RunUAT.bat
+set PluginPath=%~dp0%PluginName%.uplugin
+set OutputPath=%~dp0Build
+
+echo Automation Tool Path: %AutomationToolPath%
+echo:
+
+call "%AutomationToolPath%" BuildPlugin -Plugin="%PluginPath%" -Package="%OutputPath%" -Rocket -TargetPlatforms=Win64
+echo:
+pause
+exit 0
